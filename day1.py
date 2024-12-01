@@ -1,4 +1,4 @@
-# Part1
+# Part1 = 1580061
 list1 = []
 list2 = []
 
@@ -14,15 +14,9 @@ list2.sort()
 distance = sum([abs((x)- (y)) for x, y in zip(list1, list2)])
 print(distance)
 
-# Part2
-result = 0
+# Part2 = 23046913
 
-for x in list1:
-    i = 0
-    for y in list2:
-        if x == y:
-            i += 1
-    print(x, i, x * i)
-    result = result + x * i
-
+doublicates = [x for x in list1 for y in list2 if x == y]
+from collections import Counter
+result = sum([x[0] * x[1] for x in Counter(doublicates).items()])
 print(result)
