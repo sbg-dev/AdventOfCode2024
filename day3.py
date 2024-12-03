@@ -3,17 +3,28 @@ import re
 
 # Part 1 = 167090022
 data: List = []
-regex = re.compile(r"mul\((\d{1,3}),(\d{1,3})\)")
+instructions: List = []
+
+do_pattern = r"do\(\)"
+dont_pattern = r"don't\(\)"
+mul_pattern = r"mul\((\d{1,3}),(\d{1,3})\)"
 
 with open("day3_input.md", "r", encoding="utf-8") as f:
     for line in f:
-        data.append(line.strip())
+        instructions.append(re.findall(r"(do\(\))|(don't\(\))|mul\((\d{1,3}),(\d{1,3})\)", line))
 
-instructions: List = []
-instructions = [regex.findall(i) for i in data]
-
+print(len(instructions))
 total: int = 0
+enabled: bool = True
 for line in instructions:
-    for factor1, factor2 in line:
-        total += int(factor1) * int(factor2)
+    for instr in line:
+        if re.match(do_pattern, instr[0]):  # Match `do()`
+            enabled = True
+        elif re.match(dont_pattern, instr[1]):  # Match `don't()`
+            enabled = False
+        elif instr[2] and instr[3]: # Match `mul(...)`
+            if enabled:
+                x, y = int(instr[2]), int(instr[3])
+                total += x * y
+
 print(total)
