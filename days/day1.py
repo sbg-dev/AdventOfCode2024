@@ -4,7 +4,7 @@ def main():
     list1 = []
     list2 = []
 
-    with open("days/day1_input.md", "r", encoding="utf-8") as file:
+    with open("inputs/day1_input.md", "r", encoding="utf-8") as file:
         for line in file:
             left, right = line.strip().split("   ")
             list1.append(int(left))

@@ -5,7 +5,7 @@ def main():
     # Day 4 Part 1 = 2583
     # Day 4 Part 2 = 1978
     data: List = []
-    with open("days/day4_input.md", "r", encoding="utf-8") as f:
+    with open("inputs/day4_input.md", "r", encoding="utf-8") as f:
         for line in f:
             data.append(line.strip())
 

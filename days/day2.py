@@ -3,7 +3,7 @@ from typing import List
 def main():
     # Part 2 = 689
     data: List[List] = []
-    with open("days/day2_input.md", "r", encoding="utf-8") as f:
+    with open("inputs/day2_input.md", "r", encoding="utf-8") as f:
         for line in f:
             data.append(line.strip().split())
 

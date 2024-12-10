@@ -24,3 +24,7 @@ async def call_day(day: str):
         if hasattr(day_module, 'main'):
             return day_module.main()
     return {"error": "Day not found or 'main' function not available"}
+
+@app.get("/files/{file_path:path}")
+async def read_file(file_path: str):
+    return {"file_path": file_path}

@@ -11,7 +11,7 @@ def main():
     dont_pattern = r"don't\(\)"
     mul_pattern = r"mul\((\d{1,3}),(\d{1,3})\)"
 
-    with open("days/day3_input.md", "r", encoding="utf-8") as f:
+    with open("inputs/day3_input.md", "r", encoding="utf-8") as f:
         for line in f:
             instructions.append(re.findall(r"(do\(\))|(don't\(\))|mul\((\d{1,3}),(\d{1,3})\)", line))
 
