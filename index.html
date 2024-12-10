@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advent of Code API</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-image: url('media/icon_0_0.png'), url('media/icon_0_1.png'), url('media/icon_0_2.png'), url('media/icon_0_3.png');
+            background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+            background-position: left top, right top, left bottom, right bottom;
+        }
+        h1 {
+            color: #ff0000;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #008000;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        pre {
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advent of Code API</h1>
+
+    <h2>Get Days</h2>
+    <button onclick="getDays()">Get Days</button>
+    <pre id="days"></pre>
+
+    <h2>Call Day</h2>
+    <input type="text" id="dayInput" placeholder="Enter day">
+    <button onclick="callDay()">Call Day</button>
+    <pre id="dayResult"></pre>
+
+    <h2>Get Files</h2>
+    <button onclick="getFiles()">Get Files</button>
+    <pre id="files"></pre>
+
+    <h2>Read File</h2>
+    <input type="text" id="filePathInput" placeholder="Enter file path">
+    <button onclick="readFile()">Read File</button>
+    <pre id="fileContent"></pre>
+
+    <script>
+        const baseUrl = 'http://localhost:8000'; // Update this to match your FastAPI server URL
+
+        async function getDays() {
+            const response = await fetch(`${baseUrl}/days`);
+            const data = await response.json();
+            document.getElementById('days').textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function callDay() {
+            const day = document.getElementById('dayInput').value;
+            const response = await fetch(`${baseUrl}/days/${day}`);
+            //if (!day) {
+                //document.getElementById('dayResult').textContent = 'Error: Day input cannot be empty';
+                //return;
+            //}
+            const data = await response.json();
+            document.getElementById('dayResult').textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function getFiles() {
+            const response = await fetch(`${baseUrl}/files`);
+            const data = await response.json();
+            document.getElementById('files').textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function readFile() {
+            const filePath = document.getElementById('filePathInput').value;
+            const response = await fetch(`${baseUrl}/files/${filePath}`);
+            const data = await response.json();
+            document.getElementById('fileContent').textContent = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>
