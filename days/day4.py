@@ -56,9 +56,6 @@ def main():
                     if top_left_to_bottom_right and bottom_left_to_top_right:
                         x_match_count += 1
 
-    print(data[4:7])
-    print(f"Count: {count}")
-    print(f"x_match_count: {x_match_count}")
     return {"Count": count, "x_match_count": x_match_count}
 
 if __name__ == "__main__":

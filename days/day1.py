@@ -14,14 +14,12 @@ def main():
     list2.sort()
 
     distance = sum([abs((x)- (y)) for x, y in zip(list1, list2)])
-    print(distance)
 
     # Part2 = 23046913
 
     doublicates = [x for x in list1 for y in list2 if x == y]
     from collections import Counter
     result = sum([x[0] * x[1] for x in Counter(doublicates).items()])
-    print(result)
 
     return {"distance": distance, "result": result}
 

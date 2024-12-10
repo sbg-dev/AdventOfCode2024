@@ -15,7 +15,6 @@ def main():
         for line in f:
             instructions.append(re.findall(r"(do\(\))|(don't\(\))|mul\((\d{1,3}),(\d{1,3})\)", line))
 
-    print(len(instructions))
     total: int = 0
     enabled: bool = True
     for line in instructions:
@@ -29,7 +28,6 @@ def main():
                     x, y = int(instr[2]), int(instr[3])
                     total += x * y
 
-    print(total)
     return total
 
 if __name__ == "__main__":
