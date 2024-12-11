@@ -13,10 +13,6 @@ app.mount("/index", StaticFiles(directory="."), name="static")
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/items/{item_id}")
-async def read_item(item_id: int):
-    return {"item_id": item_id}
-
 @app.get("/days")
 async def get_days():
     modules = [name for _, name, _ in pkgutil.iter_modules(days.__path__)]
