@@ -31,7 +31,6 @@ def main():
 
     for report in data:
         report = list(map(int, report))  # Convert report levels to integers
-        print(f"New run: {report}")
         if is_safe(report) or can_be_safe_with_dampener(report):
             safe_count += 1
 
