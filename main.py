@@ -1,13 +1,19 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from fastapi. responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi import Request
 import days
 import pkgutil
 from os import walk, path
 
 app = FastAPI()
+templates = Jinja2Templates(directory="templates")
 
 # Mount the static files directory
-app.mount("/index", StaticFiles(directory="."), name="static")
+app.mount("/index", StaticFiles(directory="."), name="index")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/media", StaticFiles(directory="media"), name="media")
 
 @app.get("/")
 async def root():
@@ -25,6 +31,17 @@ async def call_day(day: str):
         if hasattr(day_module, 'main'):
             return day_module.main()
     return {"error": "Day not found or 'main' function not available"}
+
+@app.get("/day/{day}", response_class=HTMLResponse)
+async def read_day(day: int, request: Request):
+    if day == 1:
+        results = days.day1.main()
+        return templates.TemplateResponse("day1.html", {"request": request, "distance": results["distance"], "result": results["result"]})
+    else:
+            raise HTTPException(
+            status_code=404,
+            detail="Day not found"
+            )
 
 @app.get("/files")
 async def get_files():
