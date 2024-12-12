@@ -43,6 +43,10 @@ async def read_day(day: int, request: Request):
     elif day == 3:
         results = days.day3.main()
         return templates.TemplateResponse("day3.html", {"request": request, "total": results["total"], "day": day})
+    elif day == 4:
+        results = days.day4.main()
+        print(results)
+        return templates.TemplateResponse("day4.html", {"request": request, "count": results["count"], "x_count": results["x_count"], "day": day})
     else:
             raise HTTPException(
             status_code=404,

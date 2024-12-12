@@ -56,7 +56,7 @@ def main():
                     if top_left_to_bottom_right and bottom_left_to_top_right:
                         x_match_count += 1
 
-    return {"Count": count, "x_match_count": x_match_count}
+    return {"count": count, "x_count": x_match_count}
 
 if __name__ == "__main__":
     main()
