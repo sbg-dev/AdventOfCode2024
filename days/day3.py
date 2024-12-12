@@ -28,7 +28,7 @@ def main():
                     x, y = int(instr[2]), int(instr[3])
                     total += x * y
 
-    return total
+    return {"total": total}
 
 if __name__ == "__main__":
     main()
