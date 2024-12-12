@@ -34,7 +34,7 @@ def main():
         if is_safe(report) or can_be_safe_with_dampener(report):
             safe_count += 1
 
-    return safe_count
+    return {"save_count": safe_count}
 
 if __name__ == "__main__":
     main()
