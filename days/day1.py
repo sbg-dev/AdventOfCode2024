@@ -1,5 +1,5 @@
 
-def main():
+async def main():
     # Part1 = 1580061
     list1 = []
     list2 = []

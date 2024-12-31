@@ -35,7 +35,7 @@ async def call_day(day: str):
 @app.get("/day/{day}", response_class=HTMLResponse)
 async def read_day(day: int, request: Request):
     if day == 1:
-        results = days.day1.main()
+        results = await days.day1.main()
         return templates.TemplateResponse("day1.html", {"request": request, "distance": results["distance"], "result": results["result"]})
     elif day == 2:
         results = days.day2.main()
