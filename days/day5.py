@@ -16,10 +16,33 @@ def parse_input_data(rules: dict, orders: List):
                 orders.append([int(x) for x in line.strip().split(",")])
 
 
+def check_order(order: str, instructions: List):
+
+    def find_rule_for_element(element) -> list:
+        if element not in instructions:
+            return []
+        return instructions[element]
+
+    def compare_rule_with_order(instruction, order) -> bool:
+        for element in order:
+            if element not in instruction:
+                return False
+        return True
+
+    for i in range(len(order)-1):
+        instuction = find_rule_for_element(order[i])
+        if not compare_rule_with_order(instuction, order[i+1:]):
+            return False
+    return True
+
+
 def main():
     rules: dict = {}
     orders: List = []
     parse_input_data(rules, orders)
+
+    for order in orders:
+        print(check_order(order, rules))
 
 
 if __name__ == "__main__":
