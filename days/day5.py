@@ -1,20 +1,23 @@
 from typing import List
 
 
-def parse_input_data(rules, orders):
+def parse_input_data(rules: dict, orders: List):
     with open("inputs/day5_test_input.md", "r", encoding="utf-8") as file:
         for line in file:
+            if line == '\n':
+                continue
             try:
                 left, right = line.strip().split("|")
-                rules.append([left, right])
+                left, right = int(left), int(right)
+                if left not in rules:
+                    rules[left] = []
+                rules[left].append(right)
             except ValueError:
-                orders.append(line.strip())
-    print(rules)
-    print(orders)
+                orders.append([int(x) for x in line.strip().split(",")])
 
 
 def main():
-    rules: List = []
+    rules: dict = {}
     orders: List = []
     parse_input_data(rules, orders)
 
