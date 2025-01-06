@@ -2,7 +2,7 @@ from typing import List
 
 
 def parse_input_data(rules: dict, orders: List):
-    with open("inputs/day5_test_input.md", "r", encoding="utf-8") as file:
+    with open("inputs/day5_input.md", "r", encoding="utf-8") as file:
         for line in file:
             if line == '\n':
                 continue
@@ -39,10 +39,13 @@ def check_order(order: str, instructions: List):
 def main():
     rules: dict = {}
     orders: List = []
+    page_sum: int = 0
     parse_input_data(rules, orders)
 
     for order in orders:
-        print(check_order(order, rules))
+        if check_order(order, rules):
+            page_sum += order[len(order) // 2]
+    print(page_sum)
 
 
 if __name__ == "__main__":
