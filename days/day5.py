@@ -29,23 +29,47 @@ def check_order(order: str, instructions: List):
                 return False
         return True
 
-    for i in range(len(order)-1):
+    for i in range(len(order)):
         instuction = find_rule_for_element(order[i])
         if not compare_rule_with_order(instuction, order[i+1:]):
             return False
     return True
+
+def sort_order(order: str, instructions: List) -> None:
+
+    def find_rule_for_element(element) -> list:
+        if element not in instructions:
+            return []
+        return instructions[element]
+
+    def apply_rules(pos: int, order, instruction):
+        for element in order:
+            i = order.index(element)
+            for rule in instruction:
+                if rule == element:
+                    if i < pos:
+                        order[pos], order[i] = order[i], order[pos]
+
+    for i in range(len(order)):
+        instruction = find_rule_for_element(order[i])
+        apply_rules(i, order, instruction)
+
 
 
 def main():
     rules: dict = {}
     orders: List = []
     page_sum: int = 0
+    unsorted_sum: int = 0
     parse_input_data(rules, orders)
 
     for order in orders:
         if check_order(order, rules):
             page_sum += order[len(order) // 2]
-    print(page_sum)
+        else:
+            sort_order(order, rules)
+            unsorted_sum += order[len(order) // 2]
+    print(unsorted_sum)
 
 
 if __name__ == "__main__":
